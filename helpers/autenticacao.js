@@ -6,7 +6,7 @@ const obterToken = async (username, senha) => {
         .post('/login')                 
         .set('Content-Type', 'application/json')
         .send({ username, senha })
-        return response.body.token;
+        return response.body.token
 }                       
 
 module.exports = { obterToken }

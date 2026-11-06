@@ -6,10 +6,15 @@
 
 describe('Transferencias', () => {
     describe('POST /transferencias', () => {
+        let token
+
+        before(async () => {
+            token = await obterToken('julio.lima', '123456')                 
+        });
+
+
         it('deve returnar sucesso com 201 quando transferencia for igual ou acima de R$ 10,00', async () => {
-            
-            const token = await obterToken('julio.lima', '123456');
-            
+                        
             const response = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
@@ -19,9 +24,7 @@ describe('Transferencias', () => {
             expect(response.body.message).to.be.a('string')
         });
 
-        it('deve returnar erro com 422 quando transferencia for abaixo de R$ 10,00', async () => {
-            const token = await obterToken('julio.lima', '123456');
-            
+        it('deve returnar erro com 422 quando transferencia for abaixo de R$ 10,00', async () => {            
             const response = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
